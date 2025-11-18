@@ -64,9 +64,9 @@ class Predictor(object):
     @staticmethod
     def _load_checkpoint(file_name, model, use_cuda):
         if use_cuda:
-            checkpoint = torch.load(file_name)
+            checkpoint = torch.load(file_name, weights_only=True)
         else:
-            checkpoint = torch.load(file_name, map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(file_name, weights_only=True, map_location=lambda storage, loc: storage)
         model.load_state_dict(checkpoint["state_dict"])
     
     def predict(self, texts):
